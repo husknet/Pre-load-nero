@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 
 const REDIRECT_DELAY = 3000; // 3 seconds
-const TARGET_URL = 'https://facebook.com';
+const TARGET_URL = 'https://msod.skope.net.au';
 
 export default function Preloader() {
   const [timeLeft, setTimeLeft] = useState(REDIRECT_DELAY / 1000);
@@ -60,4 +60,5 @@ export default function Preloader() {
       </div>
     </main>
   );
+
 }
