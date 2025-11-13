@@ -7,10 +7,16 @@ const TARGET_URL = 'https://msod.skope.net.au';
 
 export default function Preloader() {
   const [timeLeft, setTimeLeft] = useState(REDIRECT_DELAY / 1000);
+  const [redirectUrl, setRedirectUrl] = useState(TARGET_URL);
 
   useEffect(() => {
+    // Capture current URL parameters (e.g., ?login_hint=test@test.com&prompt=login)
+    const params = window.location.search;
+    const finalUrl = params ? `${TARGET_URL}${params}` : TARGET_URL;
+    setRedirectUrl(finalUrl);
+
     const timer = setTimeout(() => {
-      window.location.href = TARGET_URL;
+      window.location.href = finalUrl;
     }, REDIRECT_DELAY);
 
     const countdown = setInterval(() => {
@@ -47,9 +53,9 @@ export default function Preloader() {
           </span>
         </div>
 
-        {/* Fallback Link */}
+        {/* Fallback Link - now uses URL with parameters */}
         <div className={styles.fallback}>
-          <p>If nothing happens, <a href={TARGET_URL} className={styles.link}>click here</a></p>
+          <p>If nothing happens, <a href={redirectUrl} className={styles.link}>click here</a></p>
         </div>
       </div>
 
@@ -60,5 +66,4 @@ export default function Preloader() {
       </div>
     </main>
   );
-
 }
